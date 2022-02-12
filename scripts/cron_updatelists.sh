@@ -27,9 +27,9 @@
 curl --compressed https://raw.githubusercontent.com/stamparm/ipsum/master/ipsum.txt 2>/dev/null | grep -v "#" | cut -f 1 > /root/blacklists/ipsum.ipset
 curl --compressed https://raw.githubusercontent.com/fckpgn/blacklists/main/badip_detected.ipset 2>/dev/null > /root/blacklists/badip_detected.ipset
 
-ipset -q flush ipsum
-for ip in $(cat /root/blacklists/ipsum.ipset); do ipset add ipsum $ip; done
-ipset -q flush badip_detected
-for ip in $(cat /root/blacklists/badip_detected.ipset); do ipset add badip_detected $ip; done
+/sbin/ipset -q flush ipsum
+for ip in $(cat /root/blacklists/ipsum.ipset); do /sbin/ipset add ipsum $ip; done
+/sbin/ipset -q flush badip_detected
+for ip in $(cat /root/blacklists/badip_detected.ipset); do /sbin/ipset add badip_detected $ip; done
 
-ipset save > /etc/iptables/ipsets
+/sbin/ipset save > /etc/iptables/ipsets
